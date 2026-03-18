@@ -1,9 +1,12 @@
-<script src="https://www.paypal.com/sdk/js?client-id=AfNDtTaZecdheEmBUAc8THMAnWsPj88F62xiBalT0Wd3HspaUVgP8ut7tpsrB87PE7sn3Fkp06j-vkLC&currency=USD"></script>
+<input type="text" id="wallet" placeholder="Enter your USDT TRC20 wallet" />
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<div id="paypal-button-container"></div>
 
 <script>
-const supabase = supabase.createClient("https://rpbdygyzcdjsxnmvdtne.supabase.co", "sb_publishable_f_MZ8P5eZtSC29hMWmuxXA_-alYehi5");
+const supabaseClient = supabase.createClient(
+"https://rpbdygyzcdjsxnmvdtne.supabase.co",
+"sb_publishable_f_MZ8P5eZtSC29hMWmuxXA_-alYehi5"
+);
 
 const params = new URLSearchParams(window.location.search);
 const amount = params.get("amount");
@@ -20,16 +23,18 @@ purchase_units: [{ amount: { value: amount } }]
 onApprove: async (data, actions) => {
 const details = await actions.order.capture();
 
-// SAVE ORDER TO SUPABASE
-await supabase.from("orders").insert([{
-name: "Customer",
-email: "N/A",
+const wallet = document.getElementById("wallet").value;
+
+await supabaseClient.from("orders").insert([{
+name: details.payer.name.given_name,
+email: details.payer.email_address,
 product: product,
 amount: amount,
-wallet: "Pending Input",
+wallet: wallet,
 status: "pending"
 }]);
 
+alert("Order placed successfully!");
 window.location.href = "success.html";
 
 }
