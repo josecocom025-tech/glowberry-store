@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Glow Berry Gifts Ltd</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h1>Glow Berry Gifts Ltd</h1>
+<p>Crypto Gift Cards POS System</p>
+
+<div class="grid">
+
+<div class="card">
+<h2>$20 Gift Card</h2>
+<a href="checkout.html?amount=20&product=GiftCard20">
+<button>Buy</button>
+</a>
+</div>
+
+<div class="card">
+<h2>$50 Gift Card</h2>
+<a href="checkout.html?amount=50&product=GiftCard50">
+<button>Buy</button>
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
